@@ -8,31 +8,41 @@
 {% block body %}
 <h1>All Posts</h1>
 
-    <hr>
-    <h2>Create New Blog Post:</h2>
-    <form action="/posts" method = 'POST'>
-        Title: <input type ='text' name ='title' id ='title'>
-        <br>
-        Author: <input type ='text' name = 'author' id = 'author'>
-        <br>
-        Post: <input type ='text' name = 'content' id = 'content'>
-        <br>
-        <input type ='submit' value ='Post'>
-    </form>
-    <hr>
+<hr>
+<h2>Create New Blog Post:</h2>
+<form action="/posts" method='POST'>
+    Title:
+    <input class="form-control" type="text" name='title' id='title' placeholder="Enter Title" aria-label="Enter Title">
+    <br>
+    Author:
+    <input class="form-control" type="text" name='author' id='author'  placeholder="Enter Author"
+        aria-label="Enter Author">
+    <br>
+    Post:
+    <input class="form-control" type="text" name='content' id='content' placeholder="Enter Posts"
+        aria-label="Enter Posts">
+    <br>
+    <input type='submit' value='Post'>
+</form>
+<hr>
 
-    {% for post in posts %}
-        <h2>{{ post.title}}</h2>
+{% for post in posts %}
+<br>
+<h2>{{ post.title}}</h2>
 
-        {% if post.author %}
-            <h3>By: {{ post.author}}</h3>
-        {% else %}
-            <h3>By: N/A</h3>
-        {% endif %}
-        <p>{{ post.content}}</p>
-        <a href="/posts/delete/{{post.id}}"> Delete</a>
-        <a href="/posts/edit/{{post.id}}">Edit</a>
-        <hr>
-    {% endfor %}  
+{% if post.author %}
+<h3></h3>
+<small>Written by {{ post.author}} on {{post.date_posted}}</small>
+{% else %}
+<small>Written by Unknown on {{post.date_posted}}</small>
+{% endif %}
+<br>
+<br>
+<p>{{ post.content}}</p>
+<a class='btn btn-danger' ref="/posts/delete/{{post.id}}"> Delete</a>
+<a class='btn btn-primary' href="/posts/edit/{{post.id}}">Edit</a>
+<br>
+<hr>
+{% endfor %}
 
 {% endblock %}

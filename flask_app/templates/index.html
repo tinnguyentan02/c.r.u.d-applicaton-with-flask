@@ -1,10 +1,29 @@
 {% extends 'base.html' %}
 
-{% block hea %}
+{% block head %}
 <title>Home</title>
 {% endblock %}
 
 {% block body %}
+<br>
 <h1>Home Page</h1>
-<h2>hello</h2>
+<br>
+<main role="main">
+    <div class="jumbotron">
+        <div class="col-sm-8 mx-auto">
+            <h1>Welcome</h1>
+            <p>Are you ready to unleash your creativity and share your passions with the world? Look no further! Our
+                website is the perfect platform for you to start your blogging journey. Whether you're an aspiring
+                writer, an expert in your field, or someone with unique life experiences, we invite you to join our
+                vibrant community of bloggers.
+            </p>
+            <p>Don't worry if you're new to blogging. Our user-friendly interface makes it easy for beginners to get
+                started. Simply click the link below to access the writing page, and you'll be on your way to creating
+                your very first blog post. </p>
+            <p>
+                <a class="btn btn-primary" href="/posts" role="button">Go to Posts &raquo;</a>
+            </p>
+        </div>
+    </div>
+</main>
 {% endblock %}
