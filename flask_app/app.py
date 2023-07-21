@@ -17,18 +17,6 @@ class BlogPost(db.Model):
     def __repr__(self):
         return 'Blog post ' + str(self.id)
 
-# all_posts = [
-#     {
-#         'title': 'Post 1',
-#         'content ': 'This is the content of post 1. lala',
-#         'author' : 'Aaron'
-#     },
-#     {
-#         'title': 'Post 2',
-#         'content': 'This is the content of post 2. lala',
-#     }
-# ]
-
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -58,7 +46,7 @@ def get_req():
 
 @app.route('/posts/delete/<int:id>')
 def delete(id):
-    post = BlogPost.query.get_or_404(id)
+    post = BlogPost.query.get(id)
     db.session.delete(post)
     db.session.commit()
     return redirect('/posts')
@@ -76,5 +64,17 @@ def edit(id):
         return render_template('edit.html', post = post)
     
 
+@app.route('/posts/new', methods =['GET', 'POST'])
+def new_post():
+    if request.method == 'POST':
+        post_title = request.form['title']
+        post_author = request.form['author']
+        post_content = request.form['content']
+        new_post = BlogPost(title = post_title, content = post_content, author = post_author)
+        db.session.add(new_post)
+        db.session.commit()
+        return redirect('/posts')
+    else:
+        return render_template('new_post.html')
 if __name__ == "__main__":
     app.run(debug = True)
